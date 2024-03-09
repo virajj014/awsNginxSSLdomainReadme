@@ -1,4 +1,27 @@
-ssh -i "tempkey10.pem" ubuntu@ec2-52-66-29-165.ap-south-1.compute.amazonaws.com
+STEPS we have followed -
+1 . CREATE EC2 instance
+2. Elastic ip - http://65.1.35.86
+3. uploaded backend code to github from local
+4. uploaded backend code from github to ec2
+5. used PM2 to run backend code in ec2
+         on - http://65.1.35.86:8001
+   
+6. used nginx to bypass 8001 port
+instead of  - http://65.1.35.86:8001 
+now we just write - http://65.1.35.86
+
+7. connect  http://taskmanager.harshaljain.in
+to http://65.1.35.86         
+
+8. Got SSL certificate from certbot
+to make http req secure ->>>> https
+
+
+
+
+COMMANDS we have followed - 
+
+#ssh -i "tempkey0.pem" ubuntu@ec2-5165.ap-south-1.compute.amazonaws.com
 
 sudo apt-get update
 
