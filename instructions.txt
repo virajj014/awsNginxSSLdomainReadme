@@ -1,0 +1,77 @@
+ssh -i "tempkey10.pem" ubuntu@ec2-52-66-29-165.ap-south-1.compute.amazonaws.com
+
+sudo apt-get update
+
+curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt install nodejs
+
+
+
+-------------------- connect git ssh to ec2 --------
+git config — global user.name “Your Name”
+git config — global user.email “your_email@example.com”
+
+
+
+---- push code first to github -----
+--- clone the git repo ( SSH option ) to ec2 -------
+sudo npm i pm2 -g
+pm2 start index.js
+export FRONTEND_URL=http://localhost:3000
+pm2 stop all
+pm2 start all
+pm2 save
+pm2 startup
+
+sudo apt install nginx
+sudo nano /etc/nginx/sites-available/default
+
+
+
+---- change root in niginx config 
+
+ location / {
+        proxy_pass http://localhost:8000; #whatever port your app runs on
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+
+
+sudo nginx -t
+
+
+--- remove 8000 ( your port ) from security rules
+
+
+
+--- go to godaddy and add subdomain with your ip
+now http://free.harshaljain.in/ is the domain where free is type A subdomain for your ip
+
+
+
+sudo snap install core; sudo snap refresh core
+sudo apt remove certbot
+sudo snap install --classic certbot
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+
+
+
+sudo nano /etc/nginx/sites-available/default
+ -- server_name free.harshaljain.in;
+
+sudo systemctl reload nginx
+
+
+sudo certbot --nginx -d free.harshaljain.in
+
+
+
+> for renewal in future
+sudo certbot renew --dry-run
+
+
+ALL DONE
